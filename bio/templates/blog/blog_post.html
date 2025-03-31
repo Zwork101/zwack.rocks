@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}blog-post{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/blog_post.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div id="stars" style="contain: paint;"></div>
+<div id="stars2" style="contain: paint;"></div>
+<div id="stars3" style="contain: paint;"></div>
+<main class="island">
+    <section class="row">
+    <h1>{{ page.title }}</h1>
+    <section class="row right">
+        <div class="col">
+            <p>Author: {{ page.author }}</p>
+            <div class="row">
+                <small>Posted: {{ page.first_published_at|date:'F jS, Y' }}</small>
+                <small>Updated: {{ page.last_published_at|date:'F jS, Y' }}</small>
+            </div>
+        </div>
+    </section>
+    </section>
+    <article class="text-box">
+        {% for block in page.content %}
+        {% include_block block %}
+        {% endfor %}
+    </article>
+</main>
+<div class='back' id="links">
+    <a href="{{ page.get_parent.url }}">
+    <div class="btn blue">
+        <p>Blog Posts<p>
+    </div>
+    </a>
+    <a href="/">
+    <div class="btn green">
+        <p>Homepage<p>
+    </div>
+    </a>
+</div>
+{% endblock %}

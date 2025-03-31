@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}blog-index{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/blog_post_index.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div id="stars" style="contain: paint;"></div>
+<div id="stars2" style="contain: paint;"></div>
+<div id="stars3" style="contain: paint;"></div>
+<main class="island">
+    <div class="row spaced">
+    <h1>Nathan's Blog</h1>
+    <a class="btn right grey" href="/">Return Home</a>
+    </div>
+    <div class='articles'>
+    {% for page in page.get_children %}
+        <a href="{% pageurl page %}">
+            <article style="background-image: linear-gradient(135deg, rgba(49, 50, 68,1) 20%, rgba(0,0,0,0)), url({{ page.specific.primary_image }});">
+            <h2>{{ page.title }}</h2>
+            <p>{{ page.specific.trailer }}</p>
+            </article>
+        </a>
+    {% endfor %}
+    </div>
+</main>
+{% endblock %}

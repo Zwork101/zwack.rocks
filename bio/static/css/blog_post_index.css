@@ -1,0 +1,34 @@
+.row.spaced {
+    justify-content: space-between;
+  }
+  
+  .articles {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    gap: 2.5rem;
+  }
+  
+  a {
+    color: unset;
+  }
+  
+  article {
+    background: var(--surface);
+    padding: .5rem 2rem;
+    border-radius: 4px;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: 120% 75%;
+    width: 100%;
+    border: solid 2px var(--crust);
+    transition: .3s border;
+  }
+  
+  article:hover {
+    border: solid 2px var(--blue);
+  }
+  
+  article > p {
+    width: 70%;
+  }

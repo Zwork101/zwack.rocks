@@ -1,0 +1,28 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped:3
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - uploads:/media
+  db:
+    image: postgres:bookworm
+    restart: unless-stopped:3
+    environment:
+      POSTGRES_USER: wagtail
+      POSTGRES_PASSWORD: wagtail
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  uploads:

@@ -1,0 +1,63 @@
+.island {
+    margin-bottom: 6rem;
+  }
+  
+  .text-box {
+    min-width: calc(100% + 2rem);
+    background: var(--surface);
+    margin: 0 0 -1rem -1rem;
+    padding: 2rem;
+    display: flex;
+    flex-flow: column;
+  }
+  
+  .text-box > figure > img {
+    width: 60%;
+  }
+  
+  .text-box > figure {
+    margin: 2rem 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  
+  .text-box > img::after {
+    content: attr(alt);
+    display: inline-block;
+  }
+  
+  .back {
+    position: fixed;
+    bottom: 20px;
+    right: 50vw;
+    display: flex;
+    flex-flow: row;
+    gap: 4rem;
+    transition: transform .3s ease-in-out;
+    transform: translate(50%, 20vh);
+  }
+  
+  .back.reveal-back {
+    transform: translate(50%, 0);
+  }
+  
+  @keyframes animStar {
+      from {
+        transform: translateY(-20vh);
+      }
+      to {
+        transform: translateY(-20vh);
+      }
+    }
+  
+  @media only screen and (min-width: 992px) {
+    .text-box {
+      margin: 0 0 -3rem -3rem;
+      min-width: calc(100% + 6rem);
+    }
+    
+    .right {
+    justify-content: right;
+  }
+  }
