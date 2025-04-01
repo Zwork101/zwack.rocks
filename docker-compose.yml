@@ -3,20 +3,27 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    restart: unless-stopped:3
+      secrets:
+      - environment_secrets
+    ports:
+      - "8100:8000"
+    restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
     volumes:
       - uploads:/media
+    secrets:
+      - environment_secrets
   db:
     image: postgres:bookworm
-    restart: unless-stopped:3
+    restart: unless-stopped
     environment:
       POSTGRES_USER: wagtail
       POSTGRES_PASSWORD: wagtail
+      POSTGRES_DB: wagtail
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
       interval: 1s
       timeout: 5s
       retries: 10
@@ -26,3 +33,7 @@ services:
 volumes:
   pgdata:
   uploads:
+
+secrets:
+  environment_secrets:
+    file: ./.env
